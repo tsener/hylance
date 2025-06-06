@@ -1,0 +1,11 @@
+hitch:
+  frontend: "[0.0.0.0]:443"
+  backend: "127.0.0.1:8080"
+  pemFile: "/etc/hitch/certs/default"
+  clientCA: "/etc/hitch/ca/ca.pem"
+
+balance:
+  listen: "0.0.0.0 8080"
+  backends:
+    - "10.0.0.1:80"
+    - "10.0.0.2:80"

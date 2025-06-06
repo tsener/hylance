@@ -1,9 +1,6 @@
 #!/bin/sh
-# Simple entrypoint launching Balance then Hitch
+# Entrypoint launching the hylance wrapper which spawns Balance and Hitch
 set -e
 
-if [ -f /etc/hylance/balance.conf ]; then
-    /usr/local/bin/balance /etc/hylance/balance.conf &
-fi
+exec /usr/local/bin/hylance-wrapper "$@"
 
-exec hitch "$@"
