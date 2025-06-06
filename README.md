@@ -36,5 +36,8 @@ command to build the combined image locally:
 docker build -t hylance:latest .
 ```
 
-The image entrypoint starts Balance if `/etc/hylance/balance.conf` is present
-and then runs Hitch.
+The image entrypoint invokes the `hylance-wrapper` binary. The wrapper reads a
+YAML configuration (default `/etc/hylance/hylance.yaml`), writes Hitch and
+Balance configuration files, then launches both processes. Balance is started
+only when backends are specified.
+An example configuration is provided in `example-config.yaml`.
