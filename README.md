@@ -41,3 +41,4 @@ YAML configuration (default `/etc/hylance/hylance.yaml`), writes Hitch and
 Balance configuration files, then launches both processes. Balance is started
 only when backends are specified.
 An example configuration is provided in `example-config.yaml`.
+

@@ -3,3 +3,4 @@
 set -e
 
 exec /usr/local/bin/hylance-wrapper "$@"
+

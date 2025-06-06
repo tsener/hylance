@@ -7,5 +7,6 @@ produce `HylanceIngress` resources. An initial stub of this controller lives in
 `cmd/controller`. The controller will write the unified YAML file into the pod
 running the wrapper.
 
+
 Helm charts will provide templates for deploying the controller and the binary
 with RBAC rules and Service definitions.
