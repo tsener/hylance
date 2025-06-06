@@ -28,11 +28,11 @@ Create a highly performant Kubernetes ingress controller that:
 * Identify bottlenecks or inefficiencies that could compound when combined.
 * Consider whether a full rewrite or partial rewrite (e.g., critical paths in Rust/C/ASM) would significantly improve performance.
 
-## Step 2: Architecture & Wrapper Design
+## Step 2: Architecture & Service Design
 
 ### 2.1 Single Binary Architecture
 
-* Design wrapper architecture:
+* Design service architecture:
 
   * Initial SSL termination layer (Hitch-derived).
   * Subsequent load balancing layer (Balance-derived).
