@@ -14,10 +14,15 @@ and deployment.
 - `integration.md` covers merging the sources and performance considerations.
 - `documentation.md` notes contribution guidelines and licensing.
 
-## Building Hitch
-Hitch sources are included in the `tls` directory.  Run the standard `configure`
-script and `make` to build a `hitch` binary.  The GitHub Actions workflow also
-compiles Hitch to verify pull requests.
+## Building
+Balance lives in the `tcp` directory and can be compiled with:
+
+```sh
+make -C tcp
+```
+
+Hitch is no longer built from source in this repository. The Docker image uses
+the official [`hitch`](https://hub.docker.com/_/hitch) container as its base.
 
 
 ## Docker Image
