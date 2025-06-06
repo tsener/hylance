@@ -10,8 +10,6 @@
 - Hitch requires additional libraries which complicates static compilation.
 
 
-Since `libev` was not present on the system, a vendored copy is now managed
-under `vendor/libev`. The helper scripts there build a static library so Hitch
-can be linked without external dependencies. On restricted networks the
-`download.sh` script may fail with a 403 error. Running the GitHub Actions
-workflow will fetch the sources and complete the static build.
+The initial attempt to build Hitch showed that `libev` was missing.  A
+workflow on GitHub installs the required dependencies so the build succeeds even
+if local environments lack network access.

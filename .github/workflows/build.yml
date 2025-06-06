@@ -16,11 +16,8 @@ jobs:
           sudo apt-get install -y build-essential autoconf automake libtool pkg-config libssl-dev curl
       - name: Build Balance
         run: make -C tcp
-      - name: Build vendored libev
-        run: |
-          cd vendor/libev
-          ./download.sh
       - name: Build Hitch
         run: |
           cd tls
-          ./static-build.sh
+          ./configure
+          make
