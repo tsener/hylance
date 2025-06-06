@@ -36,9 +36,11 @@ command to build the combined image locally:
 docker build -t hylance:latest .
 ```
 
-The image entrypoint invokes the `hylance-wrapper` binary. The wrapper reads a
-YAML configuration (default `/etc/hylance/hylance.yaml`), writes Hitch and
-Balance configuration files, then launches both processes. Balance is started
-only when backends are specified.
+The image entrypoint now launches a small Python service (`hylance-service.py`).
+It reads the YAML configuration (default `/etc/hylance/hylance.yaml`) and
+exposes the Hitch and Balance sections as JSON over HTTP. The service is
+implemented with the Bottle micro‑framework and provides read‑only GET
+endpoints. Balance is still compiled into the image but is not started by the
+service.
 An example configuration is provided in `example-config.yaml`.
 

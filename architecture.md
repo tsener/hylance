@@ -5,11 +5,10 @@ This document sketches how Hitch and Balance can be linked into a single binary.
 1. **TLS termination** via Hitch's SSL library wrappers.
 2. **TCP load balancing** reusing Balance's event loop and connection manager.
 
-A Go-based wrapper (`hylance-wrapper`) now reads a YAML configuration at
-startup and writes Hitch and Balance config files. It then launches Hitch for
-TLS termination and Balance for backend load balancing. Future work may link
-the projects into a single binary, but the initial implementation runs both
-processes side by side.
+A small Python service now reads a YAML configuration at startup and exposes
+the Hitch and Balance sections over HTTP as JSON. Future work may still link
+the projects into a single binary, but the current implementation focuses on
+serving configuration data rather than managing processes.
 
 ## Configuration
 A unified YAML file will specify:
