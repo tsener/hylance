@@ -58,9 +58,11 @@ Create a highly performant Kubernetes ingress controller that:
 * Define Custom Resource Definitions (CRD) to configure SSL termination and load balancing specifics.
 * Implement a Kubernetes operator/controller to watch for ingress objects.
 
-### 3.2 Dockerization and Static Binary Compilation
+### 3.2 Dockerization
 
-* Create Dockerfile using multi-stage builds for producing a statically linked binary.
+* Use the official `hitch` container image as the base layer.
+* Compile Balance in a separate build stage and copy the binary into the final image.
+* Provide a small entrypoint script that launches Balance (if configured) and then runs Hitch.
 * Ensure minimal container footprint for quick deployments.
 
 ### 3.3 Helm Chart and Deployment Templates
