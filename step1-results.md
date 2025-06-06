@@ -12,4 +12,6 @@
 
 Since `libev` was not present on the system, a vendored copy is now managed
 under `vendor/libev`. The helper scripts there build a static library so Hitch
-can be linked without external dependencies.
+can be linked without external dependencies. On restricted networks the
+`download.sh` script may fail with a 403 error. Running the GitHub Actions
+workflow will fetch the sources and complete the static build.

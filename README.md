@@ -23,5 +23,12 @@ The `vendor/libev` directory contains a helper script to fetch and build a stati
 (cd tls && ./static-build.sh)
 ```
 
-This will produce a static `hitch` binary using the local libev.
+This will produce a static `hitch` binary using the local libev.  If the
+download step fails with a `403 CONNECT` error it means the environment has no
+outbound network access.  In that case the included GitHub Actions workflow
+(`.github/workflows/build.yml`) can be used to run the build on GitHub's
+infrastructure where the download succeeds.
+
+The workflow compiles Balance, fetches libev, and builds Hitch statically so
+pull requests are automatically verified.
 
