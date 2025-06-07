@@ -19,7 +19,7 @@ func main() {
 		panic(err)
 	}
 
-       // TODO: watch Ingress resources and generate YAML config for the Python service
+	// TODO: watch Ingress resources and generate YAML config for the Python service
 	fmt.Println("Hylance controller started", clientset.RESTClient().APIVersion())
 	<-context.Background().Done()
 }
