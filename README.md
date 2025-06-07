@@ -1,46 +1,37 @@
 # hylance
-Kubernetes  ingress controller for fast IoT SSL termination with  mTLS support
 
-This repository also contains `plan.md`, which outlines a hybrid ingress controller
-built from the Hitch TLS proxy and the Balance TCP load balancer. The plan
-covers steps for feasibility evaluation, architecture, Kubernetes integration,
-and deployment.
+Hylance is a lightweight ingress controller that combines the Hitch TLS proxy with the Balance TCP load balancer. A small Python service exposes configuration data over HTTP and is intended to be driven by a Kubernetes controller written in Go.
 
-## Progress
+Extensive usage instructions are available in [documentation.md](documentation.md).
 
-- `step1-results.md` describes current build attempts for Hitch and Balance.
-- `architecture.md` outlines the proposed single-binary design.
-- `k8s-integration.md` shows the planned CRD and controller approach.
-- `integration.md` covers merging the sources and performance considerations.
-- `documentation.md` notes contribution guidelines and licensing.
+## Building Balance
 
-## Building
 Balance lives in the `tcp` directory and can be compiled with:
 
 ```sh
 make -C tcp
 ```
 
-Hitch is no longer built from source in this repository. The Docker image uses
-the official [`hitch`](https://hub.docker.com/_/hitch) container as its base.
-
-
 ## Docker Image
 
-The project provides a `Dockerfile` that builds on top of the official
-[`hitch`](https://hub.docker.com/_/hitch) image. Balance is compiled in a
-separate build stage and copied into the final container. Use the following
-command to build the combined image locally:
+The provided `Dockerfile` builds on top of the official [`hitch`](https://hub.docker.com/_/hitch) image. Balance is compiled in a separate build stage and copied into the final container. Build the image locally with:
 
 ```sh
 docker build -t hylance:latest .
 ```
 
-The image entrypoint now launches a small Python service (`hylance-service.py`).
-It reads the YAML configuration (default `/etc/hylance/hylance.yaml`) and
-exposes the Hitch and Balance sections as JSON over HTTP. The service is
-implemented with the Bottle micro‑framework and provides read‑only GET
-endpoints. Balance is still compiled into the image but is not started by the
-service.
-An example configuration is provided in `example-config.yaml`.
+Run the container and mount a configuration file:
+
+```sh
+docker run \
+  -v $PWD/example-config.yaml:/etc/hylance/hylance.yaml \
+  -p 8080:8080 hylance:latest
+```
+
+The service exposes two read-only endpoints:
+
+- `GET /config/hitch` – returns the Hitch configuration in JSON.
+- `GET /config/balance` – returns the Balance configuration in JSON.
+
+A sample configuration is provided in `example-config.yaml`.
 
