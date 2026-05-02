@@ -24,7 +24,7 @@ def call_get(path):
     body = BytesIO()
     status = {}
 
-    def start_response(s, h):
+    def start_response(s, h, exc_info=None):
         status["status"] = s
 
     for chunk in app(env, start_response):
@@ -51,4 +51,3 @@ def test_config_endpoints(tmp_path):
     status, body = call_get("/config/balance")
     assert status.startswith("200")
     assert "0.0.0.0 8080" in body
-

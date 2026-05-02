@@ -7,7 +7,8 @@ CONFIG_PATH = os.environ.get('HYLANCE_CONFIG', '/etc/hylance/hylance.yaml')
 app = Bottle()
 
 def load_config():
-    with open(CONFIG_PATH) as f:
+    path = os.environ.get('HYLANCE_CONFIG', CONFIG_PATH)
+    with open(path) as f:
         return yaml.safe_load(f) or {}
 
 @app.get('/config/hitch')
